@@ -1,6 +1,6 @@
 Name     : usrbinjava
 Version  : 1.2.tar
-Release  : 5
+Release  : 6
 URL      : https://github.com/clearlinux/usrbinjava/archive/v1.2.tar.gz
 Source0  : https://github.com/clearlinux/usrbinjava/archive/v1.2.tar.gz
 Summary  : No detailed summary available
