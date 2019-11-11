@@ -1,8 +1,8 @@
 Name     : usrbinjava
-Version  : 1.2.tar
-Release  : 6
-URL      : https://github.com/clearlinux/usrbinjava/archive/v1.2.tar.gz
-Source0  : https://github.com/clearlinux/usrbinjava/archive/v1.2.tar.gz
+Version  : 1.3
+Release  : 7
+URL      : https://github.com/clearlinux/usrbinjava/archive/v1.3.tar.gz
+Source0  : https://github.com/clearlinux/usrbinjava/archive/v1.3.tar.gz
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : Apache-2.0
@@ -31,8 +31,8 @@ license components for the usrbinjava package.
 
 
 %prep
-%setup -q -n usrbinjava-1.2
-cd %{_builddir}/usrbinjava-1.2
+%setup -q -n usrbinjava-1.3
+cd %{_builddir}/usrbinjava-1.3
 
 %build
 export http_proxy=http://127.0.0.1:9/
@@ -62,7 +62,7 @@ make VERBOSE=1 V=1 %{?_smp_mflags} check
 export SOURCE_DATE_EPOCH=1573233720
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/usrbinjava
-cp %{_builddir}/usrbinjava-1.2/COPYING.Apache-2.0 %{buildroot}/usr/share/package-licenses/usrbinjava/2b8b815229aa8a61e483fb4ba0588b8b6c491890
+cp %{_builddir}/usrbinjava-1.3/COPYING.Apache-2.0 %{buildroot}/usr/share/package-licenses/usrbinjava/2b8b815229aa8a61e483fb4ba0588b8b6c491890
 %make_install
 ## install_append content
 ln -s /usr/bin/java %{buildroot}/usr/bin/appletviewer
