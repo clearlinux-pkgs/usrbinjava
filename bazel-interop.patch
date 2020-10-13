@@ -1,0 +1,17 @@
+diff --git a/src/main.c b/src/main.c
+index 6450fe3..bd02316 100644
+--- a/src/main.c
++++ b/src/main.c
+@@ -67,7 +67,11 @@ int main(int argc, char **argv)
+ 	}
+ 
+ 	strcat(java, "/bin/");
+-	strncat(java, basename(argv[0]), 25);
++	if (strncmp(basename(argv[0]), "bazel", 5) == 0) {
++		strcat(java, "java");
++	} else {
++		strncat(java, basename(argv[0]), 25);
++	}
+ 
+ 	// If cannot access
+ 	if (access(java, X_OK)) {
