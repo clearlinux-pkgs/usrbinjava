@@ -4,7 +4,7 @@
 #
 Name     : usrbinjava
 Version  : 1.3
-Release  : 8
+Release  : 9
 URL      : https://github.com/clearlinux/usrbinjava/archive/v1.3.tar.gz
 Source0  : https://github.com/clearlinux/usrbinjava/archive/v1.3.tar.gz
 Summary  : No detailed summary available
@@ -13,6 +13,7 @@ License  : Apache-2.0
 Requires: usrbinjava-bin = %{version}-%{release}
 Requires: usrbinjava-license = %{version}-%{release}
 Patch1: bazel-interop.patch
+Patch2: java18.patch
 
 %description
 No detailed description available
@@ -38,21 +39,22 @@ license components for the usrbinjava package.
 %setup -q -n usrbinjava-1.3
 cd %{_builddir}/usrbinjava-1.3
 %patch1 -p1
+%patch2 -p1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1602610559
+export SOURCE_DATE_EPOCH=1652379532
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
-export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
-export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
+export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=auto "
+export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
+export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
+export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=auto "
 %autogen --disable-static
 make  %{?_smp_mflags}
 
@@ -64,7 +66,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1602610559
+export SOURCE_DATE_EPOCH=1652379532
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/usrbinjava
 cp %{_builddir}/usrbinjava-1.3/COPYING.Apache-2.0 %{buildroot}/usr/share/package-licenses/usrbinjava/2b8b815229aa8a61e483fb4ba0588b8b6c491890
