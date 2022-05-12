@@ -4,7 +4,7 @@
 #
 Name     : usrbinjava
 Version  : 1.3
-Release  : 9
+Release  : 10
 URL      : https://github.com/clearlinux/usrbinjava/archive/v1.3.tar.gz
 Source0  : https://github.com/clearlinux/usrbinjava/archive/v1.3.tar.gz
 Summary  : No detailed summary available
