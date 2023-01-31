@@ -4,7 +4,7 @@
 #
 Name     : usrbinjava
 Version  : 1.3
-Release  : 10
+Release  : 11
 URL      : https://github.com/clearlinux/usrbinjava/archive/v1.3.tar.gz
 Source0  : https://github.com/clearlinux/usrbinjava/archive/v1.3.tar.gz
 Summary  : No detailed summary available
@@ -12,6 +12,9 @@ Group    : Development/Tools
 License  : Apache-2.0
 Requires: usrbinjava-bin = %{version}-%{release}
 Requires: usrbinjava-license = %{version}-%{release}
+# Suppress stripping binaries
+%define __strip /bin/true
+%define debug_package %{nil}
 Patch1: bazel-interop.patch
 Patch2: java18.patch
 
@@ -46,15 +49,15 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1652379532
+export SOURCE_DATE_EPOCH=1675126622
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
-export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=auto "
-export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
-export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
-export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=auto "
+export CFLAGS="$CFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
+export FCFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
+export FFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
+export CXXFLAGS="$CXXFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
 %autogen --disable-static
 make  %{?_smp_mflags}
 
@@ -66,10 +69,10 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1652379532
+export SOURCE_DATE_EPOCH=1675126622
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/usrbinjava
-cp %{_builddir}/usrbinjava-1.3/COPYING.Apache-2.0 %{buildroot}/usr/share/package-licenses/usrbinjava/2b8b815229aa8a61e483fb4ba0588b8b6c491890
+cp %{_builddir}/usrbinjava-%{version}/COPYING.Apache-2.0 %{buildroot}/usr/share/package-licenses/usrbinjava/2b8b815229aa8a61e483fb4ba0588b8b6c491890 || :
 %make_install
 ## install_append content
 ln -s /usr/bin/java %{buildroot}/usr/bin/appletviewer
